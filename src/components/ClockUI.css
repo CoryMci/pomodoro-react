@@ -1,0 +1,103 @@
+.timer {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 25px;
+    border-radius: 40px;
+}
+
+.modes {
+    height: 4em;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    align-items: center;
+}
+
+.modes * {
+    width: 8em;
+    text-align: center;
+    padding: 1em;
+    border-radius: 5px;
+    transition: background-color 200ms;
+}
+
+.modes *:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+}
+
+.clocks {
+    display: grid;
+    justify-items: center;
+    grid-template-rows: 3fr 1fr;
+}
+
+.primaryclock {
+    font-size: 8em;
+    font-weight: 1000;
+    justify-self: center;
+    align-self: end;
+}
+
+.secondaryclock {
+    display: none;
+}
+
+body.finished .secondaryclock {
+    display: block;
+    transition: 2s;
+}
+
+.controls {
+    display: grid;
+    grid-template-columns: 3fr 4fr 3fr;
+    gap: 32px;
+    height: 4em;
+}
+
+.reset {
+    grid-column: 1 / 2;
+    justify-self: end;
+    align-self: center;
+    opacity:0;
+    transition: opacity 500ms;
+}
+
+.reset.active {
+    opacity: 100;
+    cursor: pointer;
+}
+
+.skip {
+    grid-column: 3 / 4;
+    align-self: center;
+    opacity: 0;
+    transition: opacity 500ms;
+}
+
+.skip.active {
+    opacity: 100;
+    cursor: pointer;
+}
+
+.toggle {
+    grid-column: 2 / 3;
+    background-color: lightgray;
+    border-radius: 10px;
+    color: grey;
+    justify-self: center;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    cursor: pointer;
+    box-shadow: 0px 5px 0 0px rgb(0 0 0 / 30%);
+    transform: translateY(-5px);
+}
+
+.toggle.active {
+    transform: translateY(0px);
+    box-shadow: none;
+}
