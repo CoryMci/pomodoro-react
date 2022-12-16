@@ -1,5 +1,6 @@
 import "./App.css";
 import ClockUI from "./components/ClockUI";
+import Header from "./components/Header";
 import { useEffect, useState } from "react";
 import "./assets/fontstyle.css";
 
@@ -85,18 +86,20 @@ const App = () => {
   };
 
   return (
-    //    <Header />
-    <ClockUI
-      remainingTime={remainingTime}
-      elapsedTime={elapsedTime}
-      active={active}
-      start={start}
-      stop={stop}
-      reset={reset}
-      elapse={elapse}
-      changeMode={changeMode}
-    />
-    //    <Tasks />
+    <div className={`App ${currentMode}`}>
+      <Header />
+      <ClockUI
+        remainingTime={remainingTime}
+        elapsedTime={elapsedTime}
+        active={active}
+        start={start}
+        stop={stop}
+        reset={reset}
+        elapse={elapse}
+        changeMode={changeMode}
+      />
+      <div className="footer"></div>
+    </div>
   );
 };
 
