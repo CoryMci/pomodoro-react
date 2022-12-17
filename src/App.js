@@ -53,7 +53,6 @@ const App = () => {
 
   const changeMode = (mode = false) => {
     if (mode) {
-      console.log(mode);
       setCurrentMode(mode);
       if (mode == "pomo") {
         setLap(1);

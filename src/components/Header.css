@@ -2,6 +2,7 @@
     padding-left: 12px;
     padding-right: 12px;
     display: grid;
+    gap: 200px;
     grid-template-columns: 1fr 1fr;
     align-items: center;
 }
