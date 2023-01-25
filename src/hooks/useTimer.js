@@ -1,9 +1,19 @@
 import { useState, useEffect } from "react";
 
-export default function useTimer(duration) {
-  const [pomoDuration, setPomoDuration] = useState(25 * 60); //Hard coded default values for now, load in from user data in future.
-  const [shortBreakDuration, setShortBreakDuration] = useState(5 * 60);
-  const [longBreakDuration, setLongBreakDuration] = useState(10 * 60);
+const Mode = Object.freeze({
+  POMO: "pomo",
+  SHORT_BREAK: "shortbreak",
+  LONG_BREAK: "longbreak",
+});
+
+export default function useTimer(
+  pomo = 25 * 60,
+  short = 5 * 60,
+  long = 10 * 60
+) {
+  const [pomoDuration, setPomoDuration] = useState(pomo); //Hard coded default values for now, load in from user data in future.
+  const [shortBreakDuration, setShortBreakDuration] = useState(short);
+  const [longBreakDuration, setLongBreakDuration] = useState(long);
 
   const modeDurations = {
     pomo: pomoDuration,
@@ -16,7 +26,7 @@ export default function useTimer(duration) {
   const [startTime, setStartTime] = useState(Math.round(Date.now() / 1000)); //maybe redundant, set as undefined?
   const [carryTime, setCarryTime] = useState(0); //Time "carried over" from last stopped instance. Used when resumed
   const [lap, setLap] = useState(1); //Lap system used to alternate between short and long breaks
-  const [remainingTime, setRemainingTime] = useState(duration); //initial time set to pomodoro length by default
+  const [remainingTime, setRemainingTime] = useState(pomoDuration); //initial time set to pomodoro length by default
   const [currentMode, setCurrentMode] = useState("pomo");
 
   useEffect(() => {
@@ -66,11 +76,11 @@ export default function useTimer(duration) {
   const changeMode = (mode = false) => {
     if (mode) {
       setCurrentMode(mode);
-      if (mode == "pomo") {
+      if (mode === Mode.POMO) {
         setLap(1);
-      } else if (mode == "shortbreak") {
+      } else if (mode === Mode.SHORT_BREAK) {
         setLap(2);
-      } else if (mode == "longbreak") {
+      } else if (mode === Mode.LONG_BREAK) {
         setLap(0);
       }
       setRemainingTime(modeDurations[mode]);
@@ -79,15 +89,15 @@ export default function useTimer(duration) {
       let currentLap = lap + 1; //variable currentLap used to avoid referencing out of date "lap" state
       setLap(currentLap);
       if (currentLap == 6) {
-        setCurrentMode("longbreak");
-        setRemainingTime(modeDurations["longbreak"]);
+        setCurrentMode(Mode.LONG_BREAK);
+        setRemainingTime(modeDurations[Mode.LONG_BREAK]);
         setLap(0);
-      } else if (currentMode == "pomo") {
-        setCurrentMode("shortbreak");
-        setRemainingTime(modeDurations["shortbreak"]);
+      } else if (currentMode === Mode.POMO) {
+        setCurrentMode(Mode.SHORT_BREAK);
+        setRemainingTime(modeDurations[Mode.SHORT_BREAK]);
       } else {
-        setCurrentMode("pomo");
-        setRemainingTime(modeDurations["pomo"]);
+        setCurrentMode(Mode.POMO);
+        setRemainingTime(modeDurations[Mode.POMO]);
       }
     }
     //pseudo reset, manually adjusting remaining time instead of referencing out of date "currentMode".
