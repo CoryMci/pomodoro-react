@@ -3,32 +3,9 @@ import "./ClockUI.css";
 import parseTime from "../helpers/parseTime";
 
 export default function ClockUI(props) {
-  const {
-    remainingTime,
-    elapsedTime,
-    start,
-    stop,
-    reset,
-    elapse,
-    active,
-    changeMode,
-  } = props;
+  const { remainingTime, elapsedTime, start, stop, reset, active, changeMode } =
+    props;
   let resetBtn, toggleBtn, skipBtn;
-
-  useEffect(() => {
-    let tick = null;
-
-    if (active) {
-      tick = setInterval(() => {
-        elapse();
-      }, 1000);
-    } else {
-      clearInterval(tick);
-    }
-    return () => {
-      clearInterval(tick);
-    };
-  });
 
   if (active) {
     resetBtn = (
