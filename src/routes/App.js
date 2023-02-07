@@ -1,9 +1,10 @@
-import "./App.css";
-import ClockUI from "./components/ClockUI";
-import Header from "./components/Header";
+import "../App.css";
+import ClockUI from "../components/ClockUI";
+import Header from "../components/Header";
 import { useEffect, useState } from "react";
-import "./assets/fontstyle.css";
-import useTimer from "./hooks/useTimer";
+import "../assets/fontstyle.css";
+import useTimer from "../hooks/useTimer";
+import storage from "../lib/storage";
 
 const App = () => {
   const {
@@ -16,6 +17,8 @@ const App = () => {
     changeMode,
     currentMode,
   } = useTimer(25 * 60);
+
+  console.log(storage.getToken());
 
   return (
     <div className={`App ${currentMode}`}>
