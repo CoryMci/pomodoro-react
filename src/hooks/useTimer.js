@@ -56,6 +56,14 @@ export default function useTimer(
     }
   };
 
+  const isOverTime = () => {
+    if (elapsedTime >= modeDurations[currentMode]) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const start = () => {
     setActive(true);
     setStartTime(Math.round(Date.now() / 1000));
@@ -115,5 +123,6 @@ export default function useTimer(
     reset,
     changeMode,
     currentMode,
+    isOverTime,
   };
 }

@@ -16,7 +16,8 @@ const App = () => {
     active,
     changeMode,
     currentMode,
-  } = useTimer(25 * 60);
+    isOverTime,
+  } = useTimer(2);
 
   return (
     <div className={`App ${currentMode}`}>
@@ -29,6 +30,7 @@ const App = () => {
         stop={stop}
         reset={reset}
         changeMode={changeMode}
+        isOverTime={isOverTime}
       />
       <div className="footer"></div>
     </div>
