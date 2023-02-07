@@ -17,7 +17,7 @@ const App = () => {
     changeMode,
     currentMode,
     isOverTime,
-  } = useTimer(2);
+  } = useTimer();
 
   return (
     <div className={`App ${currentMode}`}>

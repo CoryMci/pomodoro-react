@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import "./Header.css";
 
 export default function Header(props) {
   const navigate = useNavigate();
@@ -9,15 +8,17 @@ export default function Header(props) {
   };
 
   return (
-    <div className="header">
-      <div className="title">Pomodoro</div>
-      <div className="tools">
-        <span className="settingsbtn material-symbols-outlined">settings</span>
-        <span className="reportbtn material-symbols-outlined">
+    <div className="header px-3 grid grid-cols-2 gap-48 items-center">
+      <div className="title text-3xl font-extrabold">Pomodoro</div>
+      <div className="tools justify-self-end grid grid-cols-3 gap-2">
+        <span className="settingsbtn material-symbols-outlined cursor-pointer">
+          settings
+        </span>
+        <span className="reportbtn material-symbols-outlined cursor-pointer">
           insert_chart
         </span>
         <span
-          className="loginbtn material-symbols-outlined"
+          className="loginbtn material-symbols-outlined cursor-pointer"
           onClick={loginClick}
         >
           login
