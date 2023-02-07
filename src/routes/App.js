@@ -18,8 +18,6 @@ const App = () => {
     currentMode,
   } = useTimer(25 * 60);
 
-  console.log(storage.getToken());
-
   return (
     <div className={`App ${currentMode}`}>
       <Header />
