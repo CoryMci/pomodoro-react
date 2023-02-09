@@ -1,10 +1,11 @@
 import "../App.css";
 import ClockUI from "../components/ClockUI";
+import TodoUI from "../components/TodoUI";
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
 import "../assets/fontstyle.css";
 import useTimer from "../hooks/useTimer";
-import storage from "../lib/storage";
+import useLoadTodos from "../hooks/useLoadTodos";
 
 const App = () => {
   const {
@@ -19,6 +20,8 @@ const App = () => {
     isOverTime,
   } = useTimer();
 
+  const { todos, loading, error } = useLoadTodos();
+
   return (
     <div className={`App ${currentMode}`}>
       <Header />
@@ -32,6 +35,15 @@ const App = () => {
         changeMode={changeMode}
         isOverTime={isOverTime}
       />
+      <div>
+        {loading ? (
+          <div>Loading...</div>
+        ) : error ? (
+          <div>Oops! An error occured: {error.message}</div>
+        ) : (
+          <TodoUI todos={todos} />
+        )}
+      </div>
       <div className="footer"></div>
     </div>
   );
