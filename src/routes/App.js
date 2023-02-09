@@ -1,4 +1,3 @@
-import "../App.css";
 import ClockUI from "../components/ClockUI";
 import TodoUI from "../components/TodoUI";
 import Header from "../components/Header";
@@ -23,7 +22,7 @@ const App = () => {
   const { todos, loading, error } = useLoadTodos();
 
   return (
-    <div className={`App ${currentMode}`}>
+    <div className="grid auto-rows-min justify-center bg-gray-200 text-white h-screen w-screen transition-colors cursor-default">
       <Header />
       <ClockUI
         remainingTime={remainingTime}
