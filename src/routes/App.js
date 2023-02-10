@@ -22,7 +22,7 @@ const App = () => {
   const { todos, loading, error } = useLoadTodos();
 
   return (
-    <div className="grid auto-rows-min justify-center bg-gray-200 text-white h-screen w-screen transition-colors cursor-default">
+    <div className="grid auto-rows-min justify-center gap-12 bg-red-400 text-white h-screen w-screen transition-colors cursor-default">
       <Header />
       <ClockUI
         remainingTime={remainingTime}

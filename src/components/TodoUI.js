@@ -16,25 +16,36 @@ export default function TodoUI(props) {
   }, {});
 
   return (
-    <div className="grid grid-cols-1 auto-rows-auto">
-      {projects ? "Projects" : ""}
+    <div className="grid grid-cols-1 gap-3 auto-rows-auto indent-2">
       {projects.map((project) => (
-        <div key={project._id} className="bg-black bg-opacity-30">
-          <h3>{project.title}</h3>
-          <ul>
+        <div key={project._id} className="bg-black bg-opacity-30 rounded">
+          <h3 className="mb-2 text-2xl font-bold tracking-tight text-white">
+            {project.title}
+          </h3>
+          <ul className="grid auto-rows-min justify-items-center">
             {groupedTasks[project._id]?.map((task) => (
-              <li key={task._id}>{task.title}</li>
+              <li
+                className="h-12 m-2 bg-white text-black border border-gray-200 shadow hover:bg-gray-100 rounded-lg w-11/12"
+                key={task._id}
+              >
+                {task.title}
+              </li>
             ))}
           </ul>
         </div>
       ))}
       {/* Orphan tasks */}
       {groupedTasks[null] ? (
-        <div>
-          <h3>Uncategorized</h3>
-          <ul>
+        <div className="bg-black bg-opacity-30 rounded">
+          <h3 className="text-xl">Uncategorized</h3>
+          <ul className="grid auto-rows-min justify-items-center">
             {groupedTasks[null].map((task) => (
-              <li key={task._id}>{task.title}</li>
+              <li
+                className="h-12 m-2 bg-white text-black border border-gray-200 shadow hover:bg-gray-100 rounded-lg w-11/12"
+                key={task._id}
+              >
+                {task.title}
+              </li>
             ))}
           </ul>
         </div>
