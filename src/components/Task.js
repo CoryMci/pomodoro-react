@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { deleteTask } from "../lib/crud";
 
-export function Task({ task }) {
+export function Task({ task, reload, setReload }) {
   const [isExpanded, setExpanded] = useState(false);
 
   function handleEditClick() {
@@ -14,6 +15,11 @@ export function Task({ task }) {
 
   function handleCancelClick() {
     setExpanded(false);
+  }
+
+  async function handleDeleteClick() {
+    await deleteTask(task._id);
+    setReload(!reload); //reload todos
   }
 
   return (
@@ -46,7 +52,10 @@ export function Task({ task }) {
           >
             edit
           </span>
-          <span className="material-symbols-outlined cursor-pointer self-center justify-self-center">
+          <span
+            className="material-symbols-outlined cursor-pointer self-center justify-self-center"
+            onClick={handleDeleteClick}
+          >
             delete
           </span>
         </>

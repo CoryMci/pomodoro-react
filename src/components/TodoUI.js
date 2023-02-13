@@ -26,7 +26,12 @@ export default function TodoUI(props) {
           </h3>
           <ul className="grid auto-rows-min justify-items-center">
             {groupedTasks[project._id]?.map((task) => (
-              <Task key={task._id} task={task}></Task>
+              <Task
+                key={task._id}
+                task={task}
+                reload={reload}
+                setReload={setReload}
+              ></Task>
             ))}
             <NewTask
               project={project._id}
