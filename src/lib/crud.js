@@ -34,10 +34,14 @@ export async function addTask(title, project = null) {
     signal: AbortSignal.timeout(5000),
     headers: { Authorization: token },
   });
-  const taskInfo = new URLSearchParams({
-    title: title,
-    project: project,
-  });
+  const taskInfo = !(project == null)
+    ? new URLSearchParams({
+        title: title,
+        project: project,
+      })
+    : new URLSearchParams({
+        title: title, //if project == null, dont send project info
+      });
 
   try {
     const response = await connection.post("/api/task", taskInfo);

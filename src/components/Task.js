@@ -3,6 +3,7 @@ import { deleteTask } from "../lib/crud";
 
 export function Task({ task, reload, setReload }) {
   const [isExpanded, setExpanded] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   function handleEditClick() {
     setExpanded(true);
@@ -18,8 +19,15 @@ export function Task({ task, reload, setReload }) {
   }
 
   async function handleDeleteClick() {
-    await deleteTask(task._id);
-    setReload(!reload); //reload todos
+    setLoading(true);
+    try {
+      await deleteTask(task._id);
+      setReload(!reload); //reload todos
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -46,18 +54,31 @@ export function Task({ task, reload, setReload }) {
       ) : (
         <>
           <span className="col-span-10">{task.title}</span>
-          <span
-            className="material-symbols-outlined cursor-pointer self-center justify-self-center"
-            onClick={handleEditClick}
-          >
-            edit
-          </span>
-          <span
-            className="material-symbols-outlined cursor-pointer self-center justify-self-center"
-            onClick={handleDeleteClick}
-          >
-            delete
-          </span>
+          {!loading ? (
+            <>
+              <span
+                className="material-symbols-outlined cursor-pointer self-center justify-self-center"
+                onClick={handleEditClick}
+              >
+                edit
+              </span>
+              <span
+                className="material-symbols-outlined cursor-pointer self-center justify-self-center"
+                onClick={handleDeleteClick}
+              >
+                delete
+              </span>
+            </>
+          ) : (
+            <>
+              <span className="material-symbols-outlined self-center justify-self-center text-gray-700">
+                edit
+              </span>
+              <span className="material-symbols-outlined self-center justify-self-center text-gray-700">
+                delete
+              </span>
+            </>
+          )}
         </>
       )}
     </li>

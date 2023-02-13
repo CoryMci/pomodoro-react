@@ -47,9 +47,18 @@ export default function TodoUI(props) {
           <h3 className="text-xl">Uncategorized</h3>
           <ul className="grid auto-rows-min justify-items-center">
             {groupedTasks[null].map((task) => (
-              <Task key={task._id} task={task}></Task>
+              <Task
+                key={task._id}
+                task={task}
+                reload={reload}
+                setReload={setReload}
+              ></Task>
             ))}
-            <NewTask project={null}></NewTask>
+            <NewTask
+              project={null}
+              reload={reload}
+              setReload={setReload}
+            ></NewTask>
           </ul>
         </div>
       ) : null}
