@@ -1,17 +1,25 @@
 import { useState } from "react";
-import { deleteTask } from "../lib/crud";
+import { deleteTask, editTask } from "../lib/crud";
 
 export function Task({ task, reload, setReload }) {
   const [isExpanded, setExpanded] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [title, setTitle] = useState(task.title);
+
+  function handleTitleInput(e) {
+    setTitle(e.target.value);
+  }
 
   function handleEditClick() {
+    setTitle(task.title);
     setExpanded(true);
   }
 
-  function handleSaveClick() {
+  async function handleSaveClick() {
+    await editTask(task._id, title); // Post task to API
     setExpanded(false);
-    // Save the changes to the task
+    setTitle("");
+    setReload(!reload); //reload todos
   }
 
   function handleCancelClick() {
@@ -36,7 +44,8 @@ export function Task({ task, reload, setReload }) {
         <>
           <textarea
             className="p-2 col-span-10 resize-none overflow-hidden h-20 rounded-lg border-white focus-visible:outline-none bg-inherit"
-            defaultValue={task.title}
+            value={title}
+            onChange={handleTitleInput}
           />
           <button
             className="material-symbols-outlined"

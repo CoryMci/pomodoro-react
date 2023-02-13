@@ -83,3 +83,31 @@ export async function deleteTask(taskId) {
     }
   }
 }
+
+export async function editTask(taskId, title) {
+  const token = storage.getToken();
+  const connection = axios.create({
+    baseURL: "http://localhost:3000",
+    timeout: 5000,
+    signal: AbortSignal.timeout(5000),
+    headers: { Authorization: token },
+  });
+  const taskInfo = new URLSearchParams({
+    title: title,
+  });
+
+  try {
+    const response = await connection.put(`/api/task/${taskId}`, taskInfo);
+    if (response.status === 201) {
+      return;
+    } else {
+      throw new Error(response.status);
+    }
+  } catch (err) {
+    if (err.response) {
+      throw new Error(err.response.data.error);
+    } else {
+      throw err;
+    }
+  }
+}
