@@ -111,3 +111,31 @@ export async function editTask(taskId, title) {
     }
   }
 }
+
+export async function addProject(title) {
+  const token = storage.getToken();
+  const connection = axios.create({
+    baseURL: "http://localhost:3000",
+    timeout: 5000,
+    signal: AbortSignal.timeout(5000),
+    headers: { Authorization: token },
+  });
+  const projectInfo = new URLSearchParams({
+    title: title,
+  });
+
+  try {
+    const response = await connection.post("/api/project", projectInfo);
+    if (response.status === 201) {
+      return;
+    } else {
+      throw new Error(response.status);
+    }
+  } catch (err) {
+    if (err.response) {
+      throw new Error(err.response.data.error);
+    } else {
+      throw err;
+    }
+  }
+}

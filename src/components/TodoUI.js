@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { NewProject } from "./NewProject.js";
 import { NewTask } from "./NewTask.js";
 import { Task } from "./Task.js";
 
@@ -62,15 +63,7 @@ export default function TodoUI(props) {
           </ul>
         </div>
       ) : null}
-      <div className="grid bg-black bg-opacity-30 rounded  cursor-pointer">
-        {" "}
-        <span
-          className="self-center justify-self-center material-symbols-outlined"
-          onClick="n"
-        >
-          add
-        </span>
-      </div>
+      <NewProject reload={reload} setReload={setReload}></NewProject>
     </div>
   );
 }
