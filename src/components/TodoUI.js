@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { deleteProject, editProject } from "../lib/crud.js";
 import { NewProject } from "./NewProject.js";
 import { NewTask } from "./NewTask.js";
 import { Task } from "./Task.js";
@@ -22,9 +23,17 @@ export default function TodoUI(props) {
     <div className="grid grid-cols-1 gap-3 auto-rows-auto indent-2">
       {projects.map((project) => (
         <div key={project._id} className="bg-black bg-opacity-30 rounded">
-          <h3 className="mb-2 text-2xl font-bold tracking-tight text-white">
-            {project.title}
-          </h3>
+          <div className="grid grid-cols-12">
+            <h3 className="mb-2 col-span-10 text-2xl font-bold tracking-tight text-white">
+              {project.title}
+            </h3>
+            <span className="material-symbols-outlined cursor-pointer self-center justify-self-center">
+              edit
+            </span>
+            <span className="material-symbols-outlined cursor-pointer self-center justify-self-center">
+              delete
+            </span>
+          </div>
           <ul className="grid auto-rows-min justify-items-center">
             {groupedTasks[project._id]?.map((task) => (
               <Task
