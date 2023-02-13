@@ -3,7 +3,7 @@ import { NewTask } from "./NewTask.js";
 import { Task } from "./Task.js";
 
 export default function TodoUI(props) {
-  const { todos } = props;
+  const { todos, reload, setReload } = props;
   const tasks = todos.tasks;
   const projects = todos.projects;
 
@@ -28,7 +28,11 @@ export default function TodoUI(props) {
             {groupedTasks[project._id]?.map((task) => (
               <Task key={task._id} task={task}></Task>
             ))}
-            <NewTask project={project._id}></NewTask>
+            <NewTask
+              project={project._id}
+              reload={reload}
+              setReload={setReload}
+            ></NewTask>
           </ul>
         </div>
       ))}

@@ -5,6 +5,7 @@ export default function useLoadTodos() {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [reload, setReload] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -17,7 +18,7 @@ export default function useLoadTodos() {
         setLoading(false);
       }
     })();
-  }, []);
+  }, [reload]);
 
-  return { todos, loading, error };
+  return { todos, loading, error, reload, setReload };
 }

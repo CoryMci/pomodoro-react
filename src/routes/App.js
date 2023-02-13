@@ -19,7 +19,7 @@ const App = () => {
     isOverTime,
   } = useTimer();
 
-  const { todos, loading, error } = useLoadTodos();
+  const { todos, loading, error, reload, setReload } = useLoadTodos();
 
   return (
     <div className="grid auto-rows-min justify-center gap-12 bg-red-400 text-white h-screen w-screen transition-colors cursor-default">
@@ -40,7 +40,7 @@ const App = () => {
         ) : error ? (
           <div>Oops! An error occured: {error.message}</div>
         ) : (
-          <TodoUI todos={todos} />
+          <TodoUI todos={todos} reload={reload} setReload={setReload} />
         )}
       </div>
       <div className="footer"></div>
