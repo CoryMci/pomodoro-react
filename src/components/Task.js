@@ -16,7 +16,11 @@ export function Task({ task, reload, setReload }) {
   }
 
   async function handleSaveClick() {
-    await editTask(task._id, title); // Post task to API
+    try {
+      await editTask(task._id, title); // Post task to API
+    } catch (err) {
+      alert("An error has occured, please try again!");
+    }
     setExpanded(false);
     setTitle("");
     setReload(!reload); //reload todos

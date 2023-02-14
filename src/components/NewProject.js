@@ -14,7 +14,11 @@ export function NewProject({ reload, setReload }) {
   }
 
   async function handleSaveClick() {
-    await addProject(title); // Post task to API
+    try {
+      await addProject(title); // Post task to API
+    } catch (err) {
+      alert("An error has occured, please try again!");
+    }
     setExpanded(false);
     setTitle("");
     setReload(!reload); //reload todos

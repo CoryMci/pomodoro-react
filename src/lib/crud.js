@@ -48,11 +48,11 @@ export async function addTask(title, project = null) {
     if (response.status === 201) {
       return;
     } else {
-      throw new Error(response.status);
+      throw new Error(response.message);
     }
   } catch (err) {
     if (err.response) {
-      throw new Error(err.response.data.error);
+      throw new Error(err.response.message);
     } else {
       throw err;
     }
@@ -90,12 +90,9 @@ export async function editTask(taskId, title) {
     baseURL: "http://localhost:3000",
     timeout: 5000,
     signal: AbortSignal.timeout(5000),
-    headers: { Authorization: token },
+    headers: { "Content-Type": "application/json", Authorization: token },
   });
-  const taskInfo = new URLSearchParams({
-    title: title,
-  });
-
+  const taskInfo = new URLSearchParams({ title: title });
   try {
     const response = await connection.put(`/api/task/${taskId}`, taskInfo);
     if (response.status === 201) {
@@ -129,11 +126,11 @@ export async function addProject(title) {
     if (response.status === 201) {
       return;
     } else {
-      throw new Error(response.status);
+      throw new Error(response.message);
     }
   } catch (err) {
     if (err.response) {
-      throw new Error(err.response.data.error);
+      throw new Error(err.response);
     } else {
       throw err;
     }
