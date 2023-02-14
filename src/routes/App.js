@@ -21,8 +21,20 @@ const App = () => {
 
   const { todos, loading, error, reload, setReload } = useLoadTodos();
 
+  const [bgColor, setBgColor] = useState({
+    //Hard coded defaults, add custom colors later
+    pomo: "bg-red-400",
+    shortbreak: "bg-blue-400",
+    longbreak: "bg-indigo-400",
+  });
+
   return (
-    <div className="grid auto-rows-min justify-center gap-12 bg-red-400 text-white h-screen w-screen transition-colors cursor-default">
+    <div
+      className={
+        "grid auto-rows-min justify-center gap-12 text-white h-screen w-screen transition-colors cursor-default " +
+        bgColor[currentMode]
+      }
+    >
       <Header />
       <ClockUI
         remainingTime={remainingTime}
