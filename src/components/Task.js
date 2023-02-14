@@ -19,7 +19,7 @@ export function Task({ task, reload, setReload }) {
     try {
       await editTask(task._id, title); // Post task to API
     } catch (err) {
-      alert("An error has occured, please try again!");
+      alert(err);
     }
     setExpanded(false);
     setTitle("");

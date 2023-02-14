@@ -90,7 +90,7 @@ export async function editTask(taskId, title) {
     baseURL: "http://localhost:3000",
     timeout: 5000,
     signal: AbortSignal.timeout(5000),
-    headers: { "Content-Type": "application/json", Authorization: token },
+    headers: { Authorization: token },
   });
   const taskInfo = new URLSearchParams({ title: title });
   try {
@@ -98,13 +98,16 @@ export async function editTask(taskId, title) {
     if (response.status === 201) {
       return;
     } else {
-      throw new Error(response.status);
+      console.log("tes1t");
+      throw new Error(response);
     }
   } catch (err) {
     if (err.response) {
-      throw new Error(err.response.data.error);
+      if (err.response.status === 422) {
+        throw new Error("Invalid input!");
+      }
     } else {
-      throw err;
+      throw new Error(err.message);
     }
   }
 }
