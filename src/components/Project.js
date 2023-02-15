@@ -3,7 +3,14 @@ import { deleteProject, editProject } from "../lib/crud";
 import { NewTask } from "./NewTask";
 import { Task } from "./Task";
 
-export function Project({ project, tasks, reload, setReload }) {
+export function Project({
+  project,
+  tasks,
+  reload,
+  setReload,
+  selectedTask,
+  setSelectedTask,
+}) {
   const [isExpanded, setExpanded] = useState(false);
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState(project.title);
@@ -118,6 +125,8 @@ export function Project({ project, tasks, reload, setReload }) {
               task={task}
               reload={reload}
               setReload={setReload}
+              selectedTask={selectedTask}
+              setSelectedTask={setSelectedTask}
             ></Task>
           ))}
           <NewTask

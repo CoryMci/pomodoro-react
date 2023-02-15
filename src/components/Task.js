@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { completeTask, deleteTask, editTask } from "../lib/crud";
 
-export function Task({ task, reload, setReload }) {
+export function Task({
+  task,
+  reload,
+  setReload,
+  selectedTask,
+  setSelectedTask,
+}) {
   const [isExpanded, setExpanded] = useState(false);
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState(task.title);
@@ -16,12 +22,14 @@ export function Task({ task, reload, setReload }) {
     }
   }
 
-  function handleEditClick() {
+  function handleEditClick(e) {
+    e.stopPropagation();
     setTitle(task.title);
     setExpanded(true);
   }
 
-  async function handleSaveClick() {
+  async function handleSaveClick(e) {
+    e.stopPropagation();
     if (title.length < 3 || title.length > 50) {
       setError("Task title must be between 3 and 50 characters.");
       return;
@@ -38,12 +46,14 @@ export function Task({ task, reload, setReload }) {
     setReload(!reload); //reload todos
   }
 
-  function handleCancelClick() {
+  function handleCancelClick(e) {
     setError("");
     setExpanded(false);
+    e.stopPropagation();
   }
 
-  async function handleDeleteClick() {
+  async function handleDeleteClick(e) {
+    e.stopPropagation();
     setLoading(true);
     try {
       await deleteTask(task._id);
@@ -55,7 +65,8 @@ export function Task({ task, reload, setReload }) {
     }
   }
 
-  async function handleCompleteClick() {
+  async function handleCompleteClick(e) {
+    e.stopPropagation();
     setLoading(true);
     try {
       await completeTask(task._id, !task.completed);
@@ -67,9 +78,20 @@ export function Task({ task, reload, setReload }) {
     }
   }
 
+  function handleSelectClick() {
+    setSelectedTask(task._id);
+  }
+
   return (
     <>
-      <li className="grid grid-cols-12 min-h-[48px] m-2 bg-white text-black border border-gray-200 shadow hover:bg-gray-100 rounded-lg w-11/12">
+      <li
+        className={`${
+          selectedTask === task._id
+            ? "bg-green-300 hover:bg-green-400"
+            : "bg-white hover:bg-gray-100"
+        } grid grid-cols-12 min-h-[48px] m-2 text-black border border-gray-200 shadow rounded-lg w-11/12`}
+        onClick={handleSelectClick}
+      >
         {error && (
           <div className="absolute -translate-x-full">
             <div className="flex text-right p-2">

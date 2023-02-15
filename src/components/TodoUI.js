@@ -9,6 +9,7 @@ export default function TodoUI(props) {
   const { todos, reload, setReload } = props;
   const tasks = todos.tasks;
   const projects = todos.projects;
+  const [selectedTask, setSelectedTask] = useState(null);
 
   const groupedTasks = tasks.reduce((acc, task) => {
     const projectId = task.project ? task.project._id : null;
@@ -29,6 +30,8 @@ export default function TodoUI(props) {
           tasks={groupedTasks[project._id]}
           reload={reload}
           setReload={setReload}
+          selectedTask={selectedTask}
+          setSelectedTask={setSelectedTask}
         ></Project>
       ))}
       {/* Orphan tasks */}
@@ -42,6 +45,8 @@ export default function TodoUI(props) {
                 task={task}
                 reload={reload}
                 setReload={setReload}
+                selectedTask={selectedTask}
+                setSelectedTask={setSelectedTask}
               ></Task>
             ))}
             <NewTask
