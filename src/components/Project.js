@@ -11,6 +11,11 @@ export function Project({ project, tasks, reload, setReload }) {
 
   function handleTitleInput(e) {
     setTitle(e.target.value);
+    if (e.target.value.length < 3 || e.target.value.length > 50) {
+      setError("Project title must be between 3 and 50 characters.");
+    } else {
+      setError("");
+    }
   }
 
   function handleEditClick() {
@@ -19,8 +24,14 @@ export function Project({ project, tasks, reload, setReload }) {
   }
 
   async function handleSaveClick() {
+    if (title.length < 3 || title.length > 50) {
+      setError("Project title must be between 3 and 50 characters.");
+      return;
+    } else if (error) {
+      return;
+    }
     try {
-      await editProject(project._id, title); // Post task to API
+      await editProject(project._id, title); // Post project to API
     } catch (err) {
       setError("An error has occured, please try again!");
     }
@@ -29,6 +40,7 @@ export function Project({ project, tasks, reload, setReload }) {
     setReload(!reload); //reload todos
   }
   function handleCancelClick() {
+    setError("");
     setExpanded(false);
   }
 
@@ -48,15 +60,10 @@ export function Project({ project, tasks, reload, setReload }) {
   return (
     <>
       {error && (
-        <div
-          className="fixed inset-0 h-screen w-screen flex items-center justify-center bg-black bg-opacity-50"
-          onClick={() => setError(null)}
-        >
-          <div
-            className="p-5 bg-white text-black rounded"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {error}
+        <div className="absolute">
+          <div className="flex text-right -translate-x-full p-2">
+            <div className="text-white bg-red-500">{error}</div>
+            <div class="border-solid border-l-red-500 border-l-[12px] border-y-transparent border-y-[12px] border-r-0 h-0 w-0"></div>
           </div>
         </div>
       )}
