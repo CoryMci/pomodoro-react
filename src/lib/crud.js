@@ -98,7 +98,33 @@ export async function editTask(taskId, title) {
     if (response.status === 201) {
       return;
     } else {
-      console.log("tes1t");
+      throw new Error(response);
+    }
+  } catch (err) {
+    if (err.response) {
+      if (err.response.status === 422) {
+        throw new Error("Invalid input!");
+      }
+    } else {
+      throw new Error(err.message);
+    }
+  }
+}
+
+export async function completeTask(taskId, completed) {
+  const token = storage.getToken();
+  const connection = axios.create({
+    baseURL: "http://localhost:3000",
+    timeout: 5000,
+    signal: AbortSignal.timeout(5000),
+    headers: { Authorization: token },
+  });
+  const taskInfo = new URLSearchParams({ completed: completed });
+  try {
+    const response = await connection.put(`/api/task/${taskId}`, taskInfo);
+    if (response.status === 201) {
+      return;
+    } else {
       throw new Error(response);
     }
   } catch (err) {

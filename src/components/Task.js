@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { deleteTask, editTask } from "../lib/crud";
+import { completeTask, deleteTask, editTask } from "../lib/crud";
 
 export function Task({ task, reload, setReload }) {
   const [isExpanded, setExpanded] = useState(false);
@@ -55,6 +55,18 @@ export function Task({ task, reload, setReload }) {
     }
   }
 
+  async function handleCompleteClick() {
+    setLoading(true);
+    try {
+      await completeTask(task._id, !task.completed);
+      setReload(!reload); //reload todos
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <>
       <li className="grid grid-cols-12 min-h-[48px] m-2 bg-white text-black border border-gray-200 shadow hover:bg-gray-100 rounded-lg w-11/12">
@@ -88,9 +100,15 @@ export function Task({ task, reload, setReload }) {
           </>
         ) : (
           <>
-            <span className="col-span-10">{task.title}</span>
             {!loading ? (
               <>
+                <span
+                  className="material-symbols-outlined cursor-pointer self-center justify-self-center"
+                  onClick={handleCompleteClick}
+                >
+                  {task.completed ? "check_circle" : "radio_button_unchecked"}
+                </span>
+                <span className="col-span-9">{task.title}</span>
                 <span
                   className="material-symbols-outlined cursor-pointer self-center justify-self-center"
                   onClick={handleEditClick}
@@ -106,6 +124,10 @@ export function Task({ task, reload, setReload }) {
               </>
             ) : (
               <>
+                <span className="material-symbols-outlined cursor-pointer self-center justify-self-center">
+                  {task.completed ? "check_circle" : "radio_button_unchecked"}
+                </span>
+                <span className="col-span-9">{task.title}</span>
                 <span className="material-symbols-outlined self-center justify-self-center text-gray-700">
                   edit
                 </span>

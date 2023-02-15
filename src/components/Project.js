@@ -93,7 +93,7 @@ export function Project({ project, tasks, reload, setReload }) {
             </>
           ) : (
             <>
-              <h3 className="mb-2 col-span-10 text-2xl font-bold tracking-tight text-white">
+              <h3 className="mb-2 col-span-10 text-2xl font-bold tracking-tight text-white indent-2">
                 {project.title}
               </h3>
               <span
