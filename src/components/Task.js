@@ -79,7 +79,11 @@ export function Task({
   }
 
   function handleSelectClick() {
-    setSelectedTask(task._id);
+    if (selectedTask === task._id) {
+      setSelectedTask(null);
+    } else {
+      setSelectedTask(task._id);
+    }
   }
 
   return (
@@ -89,7 +93,7 @@ export function Task({
           selectedTask === task._id
             ? "bg-green-300 hover:bg-green-400"
             : "bg-white hover:bg-gray-100"
-        } grid grid-cols-12 min-h-[48px] m-2 text-black border border-gray-200 shadow rounded-lg w-11/12`}
+        } grid grid-cols-12 min-h-[48px] m-2 text-black border border-gray-200 shadow rounded-lg w-11/12 cursor-pointer`}
         onClick={handleSelectClick}
       >
         {error && (
@@ -125,20 +129,20 @@ export function Task({
             {!loading ? (
               <>
                 <span
-                  className="material-symbols-outlined cursor-pointer self-center justify-self-center"
+                  className="material-symbols-outlined self-center justify-self-center"
                   onClick={handleCompleteClick}
                 >
                   {task.completed ? "check_circle" : "radio_button_unchecked"}
                 </span>
                 <span className="col-span-9">{task.title}</span>
                 <span
-                  className="material-symbols-outlined cursor-pointer self-center justify-self-center"
+                  className="material-symbols-outlined self-center justify-self-center"
                   onClick={handleEditClick}
                 >
                   edit
                 </span>
                 <span
-                  className="material-symbols-outlined cursor-pointer self-center justify-self-center"
+                  className="material-symbols-outlined self-center justify-self-center"
                   onClick={handleDeleteClick}
                 >
                   delete
@@ -146,7 +150,7 @@ export function Task({
               </>
             ) : (
               <>
-                <span className="material-symbols-outlined cursor-pointer self-center justify-self-center">
+                <span className="material-symbols-outlined self-center justify-self-center">
                   {task.completed ? "check_circle" : "radio_button_unchecked"}
                 </span>
                 <span className="col-span-9">{task.title}</span>
