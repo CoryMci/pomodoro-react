@@ -109,8 +109,14 @@ export function Task({
         )}
         {isExpanded ? (
           <>
+            <span
+              className="material-symbols-outlined self-center justify-self-center text-red-700"
+              onClick={handleDeleteClick}
+            >
+              delete
+            </span>
             <textarea
-              className="p-2 col-span-10 resize-none overflow-hidden h-20 rounded-lg border-white focus-visible:outline-none bg-inherit"
+              className="p-2 col-span-9 resize-none overflow-hidden h-20 rounded-lg border-white focus-visible:outline-none bg-inherit"
               value={title}
               onChange={handleTitleInput}
             />
@@ -137,18 +143,12 @@ export function Task({
                 >
                   {task.completed ? "check_circle" : "radio_button_unchecked"}
                 </span>
-                <span className="col-span-9">{task.title}</span>
+                <span className="col-span-10">{task.title}</span>
                 <span
                   className="material-symbols-outlined self-center justify-self-center"
                   onClick={handleEditClick}
                 >
                   edit
-                </span>
-                <span
-                  className="material-symbols-outlined self-center justify-self-center"
-                  onClick={handleDeleteClick}
-                >
-                  delete
                 </span>
               </>
             ) : (
@@ -156,12 +156,9 @@ export function Task({
                 <span className="material-symbols-outlined self-center justify-self-center">
                   {task.completed ? "check_circle" : "radio_button_unchecked"}
                 </span>
-                <span className="col-span-9">{task.title}</span>
+                <span className="col-span-10">{task.title}</span>
                 <span className="material-symbols-outlined self-center justify-self-center text-gray-700">
                   edit
-                </span>
-                <span className="material-symbols-outlined self-center justify-self-center text-gray-700">
-                  delete
                 </span>
               </>
             )}
