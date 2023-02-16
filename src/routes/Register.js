@@ -85,6 +85,15 @@ export default function Register() {
               Register
             </button>
           </form>
+          <div className="text-gray-500 text-center pt-8">
+            Already have an account?
+            <div
+              className="text-gray-500 underline inline pl-2 cursor-pointer"
+              onClick={() => navigate("/login")}
+            >
+              Log in
+            </div>
+          </div>
         </div>
       </div>
     </div>
