@@ -15,8 +15,8 @@ export function Task({
 
   function handleTitleInput(e) {
     setTitle(e.target.value);
-    if (e.target.value.length < 3 || e.target.value.length > 50) {
-      setError("Task title must be between 3 and 50 characters.");
+    if (e.target.value.length < 3 || e.target.value.length > 250) {
+      setError("Task title must be between 3 and 250 characters.");
     } else {
       setError("");
     }
@@ -30,8 +30,8 @@ export function Task({
 
   async function handleSaveClick(e) {
     e.stopPropagation();
-    if (title.length < 3 || title.length > 50) {
-      setError("Task title must be between 3 and 50 characters.");
+    if (title.length < 3 || title.length > 250) {
+      setError("Task title must be between 3 and 250 characters.");
       return;
     } else if (error) {
       return;
@@ -79,10 +79,13 @@ export function Task({
   }
 
   function handleSelectClick() {
-    if (selectedTask === task._id) {
-      setSelectedTask(null);
-    } else {
-      setSelectedTask(task._id);
+    if (!isExpanded) {
+      //if task is NOT expanded/being edited, select/deselect
+      if (selectedTask === task._id) {
+        setSelectedTask(null);
+      } else {
+        setSelectedTask(task._id);
+      }
     }
   }
 

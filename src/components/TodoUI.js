@@ -22,7 +22,7 @@ export default function TodoUI(props) {
   }, {});
 
   return (
-    <div className="grid grid-cols-1 gap-3 auto-rows-auto">
+    <div className="grid grid-cols-1 gap-3 w-[32rem] auto-rows-auto">
       {projects.map((project) => (
         <Project
           key={project._id}

@@ -30,7 +30,7 @@ const App = () => {
 
   return (
     <div
-      className={`grid auto-rows-min justify-center gap-12 text-white h-screen w-screen transition-colors cursor-default 
+      className={`p-4 grid auto-rows-min justify-center gap-12 text-white min-h-screen w-screen transition-colors cursor-default 
         ${bgColor[currentMode]}`}
     >
       <Header />

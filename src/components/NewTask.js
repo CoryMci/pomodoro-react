@@ -8,8 +8,8 @@ export function NewTask({ project, reload, setReload }) {
 
   function handleTitleInput(e) {
     setTitle(e.target.value);
-    if (e.target.value.length < 3 || e.target.value.length > 50) {
-      setError("Task title must be between 3 and 50 characters.");
+    if (e.target.value.length < 3 || e.target.value.length > 250) {
+      setError("Task title must be between 3 and 250 characters.");
     } else {
       setError("");
     }
@@ -20,8 +20,8 @@ export function NewTask({ project, reload, setReload }) {
   }
 
   async function handleSaveClick() {
-    if (title.length < 3 || title.length > 50) {
-      setError("Task title must be between 3 and 50 characters.");
+    if (title.length < 3 || title.length > 250) {
+      setError("Task title must be between 3 and 250 characters.");
       return;
     } else if (error) {
       return;
