@@ -30,10 +30,8 @@ const App = () => {
 
   return (
     <div
-      className={
-        "grid auto-rows-min justify-center gap-12 text-white h-screen w-screen transition-colors cursor-default " +
-        bgColor[currentMode]
-      }
+      className={`grid auto-rows-min justify-center gap-12 text-white h-screen w-screen transition-colors cursor-default 
+        ${bgColor[currentMode]}`}
     >
       <Header />
       <ClockUI
