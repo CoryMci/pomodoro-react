@@ -7,6 +7,7 @@ const Mode = Object.freeze({
 });
 
 export default function useTimer(
+  selectedTask = null,
   pomo = 25 * 60,
   short = 5 * 60,
   long = 10 * 60

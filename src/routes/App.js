@@ -5,8 +5,17 @@ import { useEffect, useState } from "react";
 import "../assets/fontstyle.css";
 import useTimer from "../hooks/useTimer";
 import useLoadTodos from "../hooks/useLoadTodos";
+import useTimerLog from "../hooks/useTimerLog";
 
 const App = () => {
+  const [selectedTask, setSelectedTask] = useState(null);
+  const [bgColor, setBgColor] = useState({
+    //Hard coded defaults, add custom colors later
+    pomo: "bg-red-400",
+    shortbreak: "bg-blue-400",
+    longbreak: "bg-indigo-400",
+  });
+
   const {
     remainingTime,
     elapsedTime,
@@ -17,16 +26,11 @@ const App = () => {
     changeMode,
     currentMode,
     isOverTime,
-  } = useTimer();
+  } = useTimer(selectedTask);
 
-  const { todos, loading, error, reload, setReload } = useLoadTodos();
+  useTimerLog(active, currentMode, elapsedTime, selectedTask);
 
-  const [bgColor, setBgColor] = useState({
-    //Hard coded defaults, add custom colors later
-    pomo: "bg-red-400",
-    shortbreak: "bg-blue-400",
-    longbreak: "bg-indigo-400",
-  });
+  const { userData, loading, error, reload, setReload } = useLoadTodos();
 
   return (
     <div
@@ -50,7 +54,13 @@ const App = () => {
         ) : error ? (
           <div>Oops! An error occured: {error.message}</div>
         ) : (
-          <TodoUI todos={todos} reload={reload} setReload={setReload} />
+          <TodoUI
+            userData={userData}
+            reload={reload}
+            setReload={setReload}
+            selectedTask={selectedTask}
+            setSelectedTask={setSelectedTask}
+          />
         )}
       </div>
       <div className="footer"></div>

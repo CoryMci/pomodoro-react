@@ -7,10 +7,10 @@ import { Task } from "./Task.js";
 import tomato from "../assets/tomato.png";
 
 export default function TodoUI(props) {
-  const { todos, reload, setReload } = props;
-  const tasks = todos.tasks;
-  const projects = todos.projects;
-  const [selectedTask, setSelectedTask] = useState(null);
+  const { userData, reload, setReload, selectedTask, setSelectedTask } = props;
+  const tasks = userData.tasks;
+  const projects = userData.projects;
+  const logs = userData.logs;
   const [tomatos, setTomatos] = useState([1, 2, 3]); // temporary pomodoro count. to be implemented
 
   const groupedTasks = tasks.reduce((acc, task) => {
@@ -23,12 +23,34 @@ export default function TodoUI(props) {
     return acc;
   }, {});
 
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // set time to 00:00 so time can match start date
+
+  const pomosToday = logs.reduce((acc, log) => {
+    const logDate = new Date(log.startTime);
+    logDate.setHours(0, 0, 0, 0); //set time to 00:00 so time can match today
+
+    if (logDate.getTime() == today.getTime() && log.completed) {
+      acc.push(log);
+    }
+    return acc;
+  }, []);
+
   return (
     <>
       <div className="text-center pb-12">
-        {tomatos.map(() => (
-          <img className="inline px-1" src={tomato} alt="tomato" />
-        ))}
+        {pomosToday.length > 0 ? (
+          <div>
+            Todays Pomdoros:
+            <div>
+              {pomosToday.map(() => (
+                <img className="inline px-1" src={tomato} alt="tomato" />
+              ))}
+            </div>
+          </div>
+        ) : (
+          "No pomodoros today!"
+        )}
       </div>
       <div className="grid grid-cols-1 gap-3 w-[32rem] auto-rows-auto">
         {projects.map((project) => (
@@ -36,6 +58,7 @@ export default function TodoUI(props) {
             key={project._id}
             project={project}
             tasks={groupedTasks[project._id]}
+            logs={logs}
             reload={reload}
             setReload={setReload}
             selectedTask={selectedTask}
