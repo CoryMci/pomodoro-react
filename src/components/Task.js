@@ -200,7 +200,7 @@ export function Task({
                 </span>
                 <span className="col-span-10">{task.title}</span>
                 <span className="self-center text-gray-700">
-                  /{task.estimatedTime}
+                  {taskLogs ? taskLogs.length : 0}/{task.estimatedTime}
                 </span>
                 <span
                   className="material-symbols-outlined self-center justify-self-center"
