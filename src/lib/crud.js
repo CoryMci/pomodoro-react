@@ -26,7 +26,7 @@ export async function loadAll() {
   }
 }
 
-export async function addTask(title, project = null) {
+export async function addTask(title, EstimatedTime, project = null) {
   const token = storage.getToken();
   const connection = axios.create({
     baseURL: "http://localhost:3000",
@@ -84,7 +84,7 @@ export async function deleteTask(taskId) {
   }
 }
 
-export async function editTask(taskId, title) {
+export async function editTask(taskId, title, estimatedTime) {
   const token = storage.getToken();
   const connection = axios.create({
     baseURL: "http://localhost:3000",
@@ -92,7 +92,10 @@ export async function editTask(taskId, title) {
     signal: AbortSignal.timeout(5000),
     headers: { Authorization: token },
   });
-  const taskInfo = new URLSearchParams({ title: title });
+  const taskInfo = new URLSearchParams({
+    title: title,
+    estimatedTime: estimatedTime,
+  });
   try {
     const response = await connection.put(`/api/task/${taskId}`, taskInfo);
     if (response.status === 201) {

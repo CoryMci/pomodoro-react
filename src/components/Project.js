@@ -4,7 +4,7 @@ import { NewTask } from "./NewTask";
 import { Task } from "./Task";
 
 export function Project({
-  logs,
+  groupedLogs,
   project,
   tasks,
   reload,
@@ -16,16 +16,6 @@ export function Project({
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState(project.title);
   const [error, setError] = useState(null);
-
-  const groupedLogs = logs.reduce((acc, log) => {
-    const taskId = log.task ? log.task : null;
-
-    if (!acc[taskId]) {
-      acc[taskId] = []; //if taskId doesn't exist, create empty array
-    }
-    acc[taskId].push(log); //push task onto array
-    return acc;
-  }, {});
 
   function handleTitleInput(e) {
     setTitle(e.target.value);

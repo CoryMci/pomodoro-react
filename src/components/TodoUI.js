@@ -23,6 +23,16 @@ export default function TodoUI(props) {
     return acc;
   }, {});
 
+  const groupedLogs = logs.reduce((acc, log) => {
+    const taskId = log.task ? log.task : null;
+
+    if (!acc[taskId]) {
+      acc[taskId] = []; //if taskId doesn't exist, create empty array
+    }
+    acc[taskId].push(log); //push task onto array
+    return acc;
+  }, {});
+
   const today = new Date();
   today.setHours(0, 0, 0, 0); // set time to 00:00 so time can match start date
 
@@ -58,7 +68,7 @@ export default function TodoUI(props) {
             key={project._id}
             project={project}
             tasks={groupedTasks[project._id]}
-            logs={logs}
+            groupedLogs={groupedLogs}
             reload={reload}
             setReload={setReload}
             selectedTask={selectedTask}
@@ -74,6 +84,7 @@ export default function TodoUI(props) {
                 <Task
                   key={task._id}
                   task={task}
+                  taskLogs={groupedLogs[task._id]}
                   reload={reload}
                   setReload={setReload}
                   selectedTask={selectedTask}
