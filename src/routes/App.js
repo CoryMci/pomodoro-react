@@ -28,7 +28,7 @@ const App = () => {
     isOverTime,
   } = useTimer(selectedTask);
 
-  useTimerLog(active, currentMode, elapsedTime, selectedTask);
+  useTimerLog(active, currentMode, elapsedTime, selectedTask, isOverTime);
 
   const { userData, loading, error, reload, setReload } = useLoadTodos();
 

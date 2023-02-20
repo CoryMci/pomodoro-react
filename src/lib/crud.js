@@ -224,3 +224,79 @@ export async function editProject(projectId, title) {
     }
   }
 }
+
+export async function addLog(task = null, completed = false) {
+  const token = storage.getToken();
+  const connection = axios.create({
+    baseURL: "http://localhost:3000",
+    timeout: 5000,
+    signal: AbortSignal.timeout(5000),
+    headers: { Authorization: token },
+  });
+
+  let logInfo; // omit "task" parameter if null due to database validation interaction.
+  if (task == null) {
+    logInfo = new URLSearchParams({
+      completed: completed,
+    });
+  } else {
+    logInfo = new URLSearchParams({
+      task: task,
+      completed: completed,
+    });
+  }
+
+  try {
+    const response = await connection.post("/api/log", logInfo);
+    if (response.status === 201 && response.data.id) {
+      return response.data.id;
+    } else {
+      throw new Error(response.message);
+    }
+  } catch (err) {
+    if (err.response) {
+      throw new Error(err.response);
+    } else {
+      throw err;
+    }
+  }
+}
+
+export async function editLog(logId, duration, completed, task) {
+  const token = storage.getToken();
+  const connection = axios.create({
+    baseURL: "http://localhost:3000",
+    timeout: 5000,
+    signal: AbortSignal.timeout(5000),
+    headers: { Authorization: token },
+  });
+
+  let logInfo;
+  if (task == null) {
+    logInfo = new URLSearchParams({
+      completed: completed,
+      duration: duration,
+    });
+  } else {
+    logInfo = new URLSearchParams({
+      completed: completed,
+      duration: duration,
+      task: task,
+    });
+  }
+
+  try {
+    const response = await connection.put(`/api/log/${logId}`, logInfo);
+    if (response.status === 201) {
+      return;
+    } else {
+      throw new Error(response.status);
+    }
+  } catch (err) {
+    if (err.response) {
+      throw new Error(err.response.data.error);
+    } else {
+      throw err;
+    }
+  }
+}
