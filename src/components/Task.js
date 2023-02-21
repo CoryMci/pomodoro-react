@@ -129,7 +129,7 @@ export function Task({
           </div>
         )}
         {isExpanded ? (
-          <div className="grid auto-rows-min">
+          <div className="grid auto-rows-min bg-white hover:bg-white">
             <textarea
               className="p-3 resize-none overflow-hidden h-20 rounded-lg border-white focus-visible:outline-none bg-inherit"
               value={title}
@@ -169,7 +169,7 @@ export function Task({
             </div>
             <div className="bg-gray-200 flex flex-row-reverse w-full">
               <button
-                className="rounded text-white bg-slate-700 w-20 h-10 m-2"
+                className="rounded text-white bg-slate-700 hover:bg-slate-800 w-20 h-10 m-2"
                 onClick={handleSaveClick}
               >
                 Save
