@@ -3,7 +3,7 @@ import storage from "./storage";
 
 export async function serverLogin(username, password) {
   const connection = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: "https://pomodoro-api-production-98e7.up.railway.app",
     timeout: 5000,
     signal: AbortSignal.timeout(5000),
   });
@@ -29,7 +29,7 @@ export async function serverLogin(username, password) {
 
 export async function serverRegister(username, password) {
   const connection = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: "https://pomodoro-api-production-98e7.up.railway.app",
     timeout: 5000,
     signal: AbortSignal.timeout(5000),
   });
