@@ -7,19 +7,18 @@ const Mode = Object.freeze({
 });
 
 export default function useTimer(
-  selectedTask = null,
-  pomo = 25 * 60,
-  short = 5 * 60,
-  long = 10 * 60
+  pomoDuration = 25,
+  shortBreakDuration = 5,
+  longBreakDuration = 10
 ) {
-  const [pomoDuration, setPomoDuration] = useState(pomo); //Hard coded default values for now, load in from user data in future.
-  const [shortBreakDuration, setShortBreakDuration] = useState(short);
-  const [longBreakDuration, setLongBreakDuration] = useState(long);
+  // const [pomoDuration, setPomoDuration] = useState(pomo * 60); //Hard coded default values for now, load in from user data in future.
+  // const [shortBreakDuration, setShortBreakDuration] = useState(short * 60);
+  // const [longBreakDuration, setLongBreakDuration] = useState(long * 60);
 
   const modeDurations = {
-    pomo: pomoDuration,
-    shortbreak: shortBreakDuration,
-    longbreak: longBreakDuration,
+    pomo: pomoDuration * 60,
+    shortbreak: shortBreakDuration * 60,
+    longbreak: longBreakDuration * 60,
   };
 
   const [active, setActive] = useState(false);
@@ -27,8 +26,12 @@ export default function useTimer(
   const [startTime, setStartTime] = useState(Math.round(Date.now() / 1000)); //maybe redundant, set as undefined?
   const [carryTime, setCarryTime] = useState(0); //Time "carried over" from last stopped instance. Used when resumed
   const [lap, setLap] = useState(1); //Lap system used to alternate between short and long breaks
-  const [remainingTime, setRemainingTime] = useState(pomoDuration); //initial time set to pomodoro length by default
+  const [remainingTime, setRemainingTime] = useState(pomoDuration * 60); //initial time set to pomodoro length by default
   const [currentMode, setCurrentMode] = useState("pomo");
+
+  useEffect(() => {
+    setRemainingTime(modeDurations[currentMode] - elapsedTime);
+  }, [pomoDuration, shortBreakDuration, longBreakDuration]);
 
   useEffect(() => {
     let tick = null;

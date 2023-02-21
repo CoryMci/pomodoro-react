@@ -6,6 +6,7 @@ import "../assets/fontstyle.css";
 import useTimer from "../hooks/useTimer";
 import useLoadTodos from "../hooks/useLoadTodos";
 import useTimerLog from "../hooks/useTimerLog";
+import Settings from "../components/Settings";
 
 const App = () => {
   const [selectedTask, setSelectedTask] = useState(null);
@@ -15,6 +16,10 @@ const App = () => {
     shortbreak: "bg-blue-400",
     longbreak: "bg-indigo-400",
   });
+  const [pomoLength, setPomoLength] = useState(25);
+  const [shortBreakLength, setShortBreakLength] = useState(5);
+  const [longBreakLength, setLongBreakLength] = useState(15);
+  const [settingsVisibility, setSettingsVisibility] = useState(false);
 
   const {
     remainingTime,
@@ -26,45 +31,57 @@ const App = () => {
     changeMode,
     currentMode,
     isOverTime,
-  } = useTimer(selectedTask);
+  } = useTimer(pomoLength, shortBreakLength, longBreakLength);
 
   useTimerLog(active, currentMode, elapsedTime, selectedTask, isOverTime);
 
   const { userData, loading, error, reload, setReload } = useLoadTodos();
 
   return (
-    <div
-      className={`p-4 grid auto-rows-min justify-center gap-12 text-white min-h-screen w-screen transition-colors cursor-default 
-        ${bgColor[currentMode]}`}
-    >
-      <Header />
-      <ClockUI
-        remainingTime={remainingTime}
-        elapsedTime={elapsedTime}
-        active={active}
-        start={start}
-        stop={stop}
-        reset={reset}
-        changeMode={changeMode}
-        isOverTime={isOverTime}
+    <>
+      <Settings
+        pomoLength={pomoLength}
+        setPomoLength={setPomoLength}
+        shortBreakLength={shortBreakLength}
+        setShortBreakLength={setShortBreakLength}
+        longBreakLength={longBreakLength}
+        setLongBreakLength={setLongBreakLength}
+        settingsVisibility={settingsVisibility}
+        setSettingsVisibility={setSettingsVisibility}
       />
-      <div>
-        {loading ? (
-          <div>Loading...</div>
-        ) : error ? (
-          <div>Oops! An error occured: {error.message}</div>
-        ) : (
-          <TodoUI
-            userData={userData}
-            reload={reload}
-            setReload={setReload}
-            selectedTask={selectedTask}
-            setSelectedTask={setSelectedTask}
-          />
-        )}
+      <div
+        className={`p-4 grid auto-rows-min justify-center gap-12 text-white min-h-screen w-screen transition-colors cursor-default 
+        ${bgColor[currentMode]}`}
+      >
+        <Header setSettingsVisibility={setSettingsVisibility} />
+        <ClockUI
+          remainingTime={remainingTime}
+          elapsedTime={elapsedTime}
+          active={active}
+          start={start}
+          stop={stop}
+          reset={reset}
+          changeMode={changeMode}
+          isOverTime={isOverTime}
+        />
+        <div>
+          {loading ? (
+            <div>Loading...</div>
+          ) : error ? (
+            <div>Oops! An error occured: {error.message}</div>
+          ) : (
+            <TodoUI
+              userData={userData}
+              reload={reload}
+              setReload={setReload}
+              selectedTask={selectedTask}
+              setSelectedTask={setSelectedTask}
+            />
+          )}
+        </div>
+        <div className="footer"></div>
       </div>
-      <div className="footer"></div>
-    </div>
+    </>
   );
 };
 

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 export default function Header(props) {
+  const { setSettingsVisibility } = props;
   const navigate = useNavigate();
 
   const loginClick = () => {
@@ -11,7 +12,12 @@ export default function Header(props) {
     <div className="header px-3 grid grid-cols-2 gap-48 items-center">
       <div className="title text-3xl font-extrabold">Pomodoro</div>
       <div className="tools justify-self-end grid grid-cols-3 gap-2">
-        <span className="settingsbtn material-symbols-outlined cursor-pointer">
+        <span
+          onClick={() => {
+            setSettingsVisibility(true);
+          }}
+          className="settingsbtn material-symbols-outlined cursor-pointer"
+        >
           settings
         </span>
         <span className="reportbtn material-symbols-outlined cursor-pointer">
