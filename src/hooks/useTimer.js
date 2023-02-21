@@ -30,7 +30,7 @@ export default function useTimer(
   const [currentMode, setCurrentMode] = useState("pomo");
 
   useEffect(() => {
-    setRemainingTime(modeDurations[currentMode] - elapsedTime);
+    setRemainingTime(modeDurations[currentMode] - elapsedTime); //to update time when user changes clock times
   }, [pomoDuration, shortBreakDuration, longBreakDuration]);
 
   useEffect(() => {

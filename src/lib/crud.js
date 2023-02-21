@@ -1,10 +1,11 @@
 import axios from "axios";
 import storage from "../lib/storage";
+const api = "https://pomodoro-api-production-98e7.up.railway.app";
 
 export async function loadAll() {
   const token = storage.getToken();
   const connection = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: api,
     timeout: 5000,
     signal: AbortSignal.timeout(5000),
     headers: { Authorization: token },
@@ -29,7 +30,7 @@ export async function loadAll() {
 export async function addTask(title, EstimatedTime, project = null) {
   const token = storage.getToken();
   const connection = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: api,
     timeout: 5000,
     signal: AbortSignal.timeout(5000),
     headers: { Authorization: token },
@@ -62,7 +63,7 @@ export async function addTask(title, EstimatedTime, project = null) {
 export async function deleteTask(taskId) {
   const token = storage.getToken();
   const connection = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: api,
     timeout: 5000,
     signal: AbortSignal.timeout(5000),
     headers: { Authorization: token },
@@ -87,7 +88,7 @@ export async function deleteTask(taskId) {
 export async function editTask(taskId, title, estimatedTime) {
   const token = storage.getToken();
   const connection = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: api,
     timeout: 5000,
     signal: AbortSignal.timeout(5000),
     headers: { Authorization: token },
@@ -117,7 +118,7 @@ export async function editTask(taskId, title, estimatedTime) {
 export async function completeTask(taskId, completed) {
   const token = storage.getToken();
   const connection = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: api,
     timeout: 5000,
     signal: AbortSignal.timeout(5000),
     headers: { Authorization: token },
@@ -144,7 +145,7 @@ export async function completeTask(taskId, completed) {
 export async function addProject(title) {
   const token = storage.getToken();
   const connection = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: api,
     timeout: 5000,
     signal: AbortSignal.timeout(5000),
     headers: { Authorization: token },
@@ -172,7 +173,7 @@ export async function addProject(title) {
 export async function deleteProject(projectId) {
   const token = storage.getToken();
   const connection = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: api,
     timeout: 5000,
     signal: AbortSignal.timeout(5000),
     headers: { Authorization: token },
@@ -197,7 +198,7 @@ export async function deleteProject(projectId) {
 export async function editProject(projectId, title) {
   const token = storage.getToken();
   const connection = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: api,
     timeout: 5000,
     signal: AbortSignal.timeout(5000),
     headers: { Authorization: token },
@@ -228,7 +229,7 @@ export async function editProject(projectId, title) {
 export async function addLog(task = null, completed = false) {
   const token = storage.getToken();
   const connection = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: api,
     timeout: 5000,
     signal: AbortSignal.timeout(5000),
     headers: { Authorization: token },
@@ -265,7 +266,7 @@ export async function addLog(task = null, completed = false) {
 export async function editLog(logId, duration, completed, task) {
   const token = storage.getToken();
   const connection = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: api,
     timeout: 5000,
     signal: AbortSignal.timeout(5000),
     headers: { Authorization: token },
