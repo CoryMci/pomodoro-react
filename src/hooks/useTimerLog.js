@@ -13,13 +13,6 @@ export default function useTimerLog(
   const [lastCompleted, setLastCompleted] = useState(false);
   const [logData, setLogData] = useState({});
 
-  // useEffect(() => {
-  //   if (currentMode === "pomo" && elapsedTime > 0) {
-  //     setLastElapsed(elapsedTime);
-  //     setLastCompleted(isOverTime());
-  //   }
-  // }, [active, currentMode, elapsedTime, selectedTask, isOverTime]);
-
   useEffect(() => {
     let timeoutId;
 
@@ -44,7 +37,7 @@ export default function useTimerLog(
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
         updateLogs(logData);
-      }, 5000);
+      }, 5000); //updates after 5 seconds have passed and another update has not been called.
     };
 
     const newLog = async () => {

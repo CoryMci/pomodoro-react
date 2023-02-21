@@ -11,7 +11,6 @@ export default function TodoUI(props) {
   const tasks = userData.tasks;
   const projects = userData.projects;
   const logs = userData.logs;
-  const [tomatos, setTomatos] = useState([1, 2, 3]); // temporary pomodoro count. to be implemented
 
   const groupedTasks = tasks.reduce((acc, task) => {
     const projectId = task.project ? task.project._id : null;
@@ -23,7 +22,14 @@ export default function TodoUI(props) {
     return acc;
   }, {});
 
-  const groupedLogs = logs.reduce((acc, log) => {
+  const completedLogs = logs.reduce((acc, log) => {
+    if (log.completed) {
+      acc.push(log);
+    }
+    return acc;
+  }, []);
+
+  const groupedLogs = completedLogs.reduce((acc, log) => {
     const taskId = log.task ? log.task : null;
 
     if (!acc[taskId]) {
@@ -36,11 +42,11 @@ export default function TodoUI(props) {
   const today = new Date();
   today.setHours(0, 0, 0, 0); // set time to 00:00 so time can match start date
 
-  const pomosToday = logs.reduce((acc, log) => {
+  const pomosToday = completedLogs.reduce((acc, log) => {
     const logDate = new Date(log.startTime);
     logDate.setHours(0, 0, 0, 0); //set time to 00:00 so time can match today
 
-    if (logDate.getTime() == today.getTime() && log.completed) {
+    if (logDate.getTime() == today.getTime()) {
       acc.push(log);
     }
     return acc;
