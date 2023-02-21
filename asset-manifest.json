@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.31eab4bc.css",
-    "main.js": "/static/js/main.d7998a2d.js",
-    "static/media/MaterialSymbolsRounded[FILL,GRAD,opsz,wght].ttf": "/static/media/MaterialSymbolsRounded[FILL,GRAD,opsz,wght].1d52a0f20db15b28580e.ttf",
-    "static/media/roboto.ttf": "/static/media/roboto.7c8d04cd831df3033c8a.ttf",
-    "index.html": "/index.html",
-    "main.31eab4bc.css.map": "/static/css/main.31eab4bc.css.map",
-    "main.d7998a2d.js.map": "/static/js/main.d7998a2d.js.map"
+    "main.css": "/pomodoro-react/static/css/main.fbe591d4.css",
+    "main.js": "/pomodoro-react/static/js/main.a4374f2a.js",
+    "static/media/MaterialSymbolsRounded[FILL,GRAD,opsz,wght].ttf": "/pomodoro-react/static/media/MaterialSymbolsRounded[FILL,GRAD,opsz,wght].1d52a0f20db15b28580e.ttf",
+    "static/media/roboto.ttf": "/pomodoro-react/static/media/roboto.7c8d04cd831df3033c8a.ttf",
+    "index.html": "/pomodoro-react/index.html",
+    "main.fbe591d4.css.map": "/pomodoro-react/static/css/main.fbe591d4.css.map",
+    "main.a4374f2a.js.map": "/pomodoro-react/static/js/main.a4374f2a.js.map"
   },
   "entrypoints": [
-    "static/css/main.31eab4bc.css",
-    "static/js/main.d7998a2d.js"
+    "static/css/main.fbe591d4.css",
+    "static/js/main.a4374f2a.js"
   ]
 }
