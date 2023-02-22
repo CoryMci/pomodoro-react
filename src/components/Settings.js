@@ -73,6 +73,12 @@ export default function Settings(props) {
             className="absolute rounded-xl bg-white w-1/4 h-min mx-auto inset-x-0 inset-y-1/4 p-4"
           >
             <h2 className="text-lg font-medium mb-4">Settings</h2>
+            <button
+              onClick={handleCloseSettings}
+              className="material-symbols-outlined absolute top-2 right-2 font-bold text-gray-400 text-l"
+            >
+              close
+            </button>
             <div className="mb-4">
               <label
                 htmlFor="pomodoroLength"

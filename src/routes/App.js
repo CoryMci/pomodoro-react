@@ -66,7 +66,10 @@ const App = () => {
         className={`p-4 grid auto-rows-min justify-center gap-12 text-white min-h-screen w-screen transition-colors cursor-default 
         ${bgColor[currentMode]}`}
       >
-        <Header setSettingsVisibility={setSettingsVisibility} />
+        <Header
+          setSettingsVisibility={setSettingsVisibility}
+          setChartVisibility={setChartVisibility}
+        />
         <ClockUI
           remainingTime={remainingTime}
           elapsedTime={elapsedTime}

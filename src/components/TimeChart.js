@@ -11,6 +11,7 @@ import {
   BarElement,
   Tooltip,
 } from "chart.js";
+import { useState } from "react";
 
 function randomColor() {
   const letters = "0123456789ABCDEF";
@@ -25,6 +26,8 @@ export default function TimeChart(props) {
   const { userData, chartVisibility, setChartVisibility } = props;
   const tasks = userData.tasks;
   const logs = userData.logs;
+
+  const [dateRange, setDateRange] = useState(6);
 
   Chart.register(
     LineElement,
@@ -43,7 +46,7 @@ export default function TimeChart(props) {
 
   const taskData = {};
   const dates = [];
-  for (let i = 6; i >= 0; i--) {
+  for (let i = dateRange; i >= 0; i--) {
     dates.push(moment().subtract(i, "days").format("YYYY-MM-DD"));
   }
 
@@ -55,11 +58,17 @@ export default function TimeChart(props) {
     };
   });
 
+  taskData["Null"] = {
+    label: "No Task",
+    data: Array(dates.length).fill(0),
+    backgroundColor: randomColor(),
+  };
+
   logs.forEach((log) => {
     const taskId = log.task;
     const date = moment(log.startTime).startOf("day").format("YYYY-MM-DD");
     const taskTitle = taskTitleById[taskId];
-    const task = taskData[taskTitle];
+    const task = taskData[taskTitle] || taskData["Null"];
     if (task) {
       const index = dates.indexOf(date);
       if (index !== -1) {
@@ -73,10 +82,45 @@ export default function TimeChart(props) {
     datasets: Object.values(taskData),
   };
 
+  function handleCloseChart(e) {
+    e.stopPropagation();
+    setChartVisibility(false);
+  }
+
+  function handleDateRangeChange(e, length) {
+    e.stopPropagation();
+    setDateRange(length);
+  }
+
   return (
     chartVisibility && (
-      <div className="fixed z-40 w-screen h-screen bg-black bg-opacity-30">
+      <div
+        onClick={handleCloseChart}
+        className="fixed z-40 w-screen h-screen bg-black bg-opacity-30"
+      >
         <div className="absolute rounded-xl bg-white w-1/4 h-min mx-auto inset-x-0 inset-y-1/4 p-4">
+          <button
+            onClick={handleCloseChart}
+            className="material-symbols-outlined absolute top-2 right-2 font-bold text-gray-400 text-l"
+          >
+            close
+          </button>
+          <div className="bg-red-500 w-max rounded-md">
+            <button
+              className="font-bold text-gray-500 text-l mx-3"
+              onClick={(e) => handleDateRangeChange(e, 6)}
+            >
+              Last week
+            </button>
+
+            <button
+              className="font-bold text-gray-500 text-l mx-3"
+              onClick={(e) => handleDateRangeChange(e, 30)}
+            >
+              Last month
+            </button>
+          </div>
+
           <Bar
             data={chartData}
             options={{
@@ -86,6 +130,16 @@ export default function TimeChart(props) {
                 },
                 y: {
                   stacked: true,
+                  ticks: {
+                    callback: function (value) {
+                      // Convert the tick value from seconds to hours and format it as "hh:mm"
+                      const hours = Math.floor(value / 3600);
+                      const minutes = Math.floor((value % 3600) / 60);
+                      return `${hours.toString().padStart(2, "0")}:${minutes
+                        .toString()
+                        .padStart(2, "0")}`;
+                    },
+                  },
                 },
               },
               plugins: {
@@ -101,7 +155,7 @@ export default function TimeChart(props) {
                     title: function (context) {
                       return (
                         moment
-                          .duration(context[0].parsed.y, "minutes")
+                          .duration(context[0].parsed.y, "seconds")
                           .asHours()
                           .toFixed(2) + " hrs"
                       );

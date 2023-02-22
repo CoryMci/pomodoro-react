@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 export default function Header(props) {
-  const { setSettingsVisibility } = props;
+  const { setSettingsVisibility, setChartVisibility } = props;
   const navigate = useNavigate();
 
   const loginClick = () => {
@@ -20,7 +20,12 @@ export default function Header(props) {
         >
           settings
         </span>
-        <span className="reportbtn material-symbols-outlined cursor-pointer">
+        <span
+          onClick={() => {
+            setChartVisibility(true);
+          }}
+          className="reportbtn material-symbols-outlined cursor-pointer"
+        >
           insert_chart
         </span>
         <span
