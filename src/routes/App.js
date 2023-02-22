@@ -7,6 +7,7 @@ import useTimer from "../hooks/useTimer";
 import useLoadTodos from "../hooks/useLoadTodos";
 import useTimerLog from "../hooks/useTimerLog";
 import Settings from "../components/Settings";
+import TimeChart from "../components/TimeChart";
 
 const App = () => {
   const [selectedTask, setSelectedTask] = useState(null);
@@ -20,6 +21,7 @@ const App = () => {
   const [shortBreakLength, setShortBreakLength] = useState(5);
   const [longBreakLength, setLongBreakLength] = useState(15);
   const [settingsVisibility, setSettingsVisibility] = useState(false);
+  const [chartVisibility, setChartVisibility] = useState(true);
 
   const {
     remainingTime,
@@ -39,6 +41,17 @@ const App = () => {
 
   return (
     <>
+      {loading ? (
+        <></>
+      ) : error ? (
+        <></>
+      ) : (
+        <TimeChart
+          userData={userData}
+          chartVisibility={chartVisibility}
+          setChartVisibility={setChartVisibility}
+        />
+      )}
       <Settings
         pomoLength={pomoLength}
         setPomoLength={setPomoLength}
