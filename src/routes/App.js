@@ -35,7 +35,7 @@ const App = () => {
     isOverTime,
   } = useTimer(pomoLength, shortBreakLength, longBreakLength); //clock functionality
 
-  const { userData, loading, error, reload, setReload } = useLoadTodos(); //loader for todos from db
+  const { userData, loading, AuthError, reload, setReload } = useLoadTodos(); //loader for todos from db
 
   useTimerLog(
     active,
@@ -43,22 +43,18 @@ const App = () => {
     elapsedTime,
     selectedTask,
     isOverTime,
-    error
+    AuthError
   ); //logging functions to save timer data to db
 
   return (
     <>
-      {loading ? (
-        <></>
-      ) : error ? (
-        <></>
-      ) : (
-        <TimeChart
-          userData={userData}
-          chartVisibility={chartVisibility}
-          setChartVisibility={setChartVisibility}
-        />
-      )}
+      {loading ? <></> : AuthError ? <div></div> : <></>}
+      <TimeChart
+        userData={userData}
+        chartVisibility={chartVisibility}
+        setChartVisibility={setChartVisibility}
+        AuthError={AuthError}
+      />
       <Settings
         pomoLength={pomoLength}
         setPomoLength={setPomoLength}
@@ -90,8 +86,8 @@ const App = () => {
         <div>
           {loading ? (
             <div className="text-center">Loading...</div>
-          ) : error ? (
-            <div></div>
+          ) : AuthError ? (
+            <div>Please log in to use todo list!</div>
           ) : (
             <TodoUI
               userData={userData}

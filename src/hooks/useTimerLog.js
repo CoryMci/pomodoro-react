@@ -7,7 +7,7 @@ export default function useTimerLog(
   elapsedTime,
   selectedTask,
   isOverTime,
-  error
+  AuthError
 ) {
   const [logId, setLogId] = useState(null);
   const [lastElapsed, setLastElapsed] = useState(0);
@@ -16,7 +16,7 @@ export default function useTimerLog(
 
   useEffect(() => {
     let timeoutId;
-    if (!error) {
+    if (!AuthError) {
       const updateLogs = async (logData) => {
         try {
           await Promise.all(

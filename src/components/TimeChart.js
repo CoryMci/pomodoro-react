@@ -24,9 +24,9 @@ function randomColor() {
 }
 
 export default function TimeChart(props) {
-  const { userData, chartVisibility, setChartVisibility } = props;
-  const tasks = userData.tasks;
-  const logs = userData.logs;
+  const { userData, chartVisibility, setChartVisibility, AuthError } = props;
+  const tasks = userData.tasks || [];
+  const logs = userData.logs || [];
 
   const [dateRange, setDateRange] = useState(6);
 
@@ -105,7 +105,14 @@ export default function TimeChart(props) {
           onClick={(e) => e.stopPropagation()}
           className="grid grid-flow-row gap-4 absolute rounded-xl bg-white w-1/4 h-min mx-auto inset-x-0 inset-y-1/4 p-4"
         >
-          <h2 className="text-xl font-medium mb-4">Report</h2>
+          {AuthError ? (
+            <h2 className="text-xl font-medium mb-4">
+              Please sign in to view report!
+            </h2>
+          ) : (
+            <h2 className="text-xl font-medium mb-4">Report</h2>
+          )}
+
           <button
             onClick={handleCloseChart}
             className="material-symbols-outlined absolute top-2 right-2 font-bold text-gray-400 text-l"

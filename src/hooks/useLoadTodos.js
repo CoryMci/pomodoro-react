@@ -4,7 +4,7 @@ import { loadAll } from "../lib/crud";
 export default function useLoadTodos() {
   const [userData, setUserData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [AuthError, SetAuthError] = useState(null);
   const [reload, setReload] = useState(false);
 
   useEffect(() => {
@@ -13,12 +13,12 @@ export default function useLoadTodos() {
         const todos = await loadAll();
         setUserData(todos);
       } catch (err) {
-        setError(err);
+        SetAuthError(err);
       } finally {
         setLoading(false);
       }
     })();
   }, [reload]);
 
-  return { userData, loading, error, reload, setReload };
+  return { userData, loading, AuthError, reload, setReload };
 }
