@@ -21,7 +21,7 @@ const App = () => {
   const [shortBreakLength, setShortBreakLength] = useState(5);
   const [longBreakLength, setLongBreakLength] = useState(15);
   const [settingsVisibility, setSettingsVisibility] = useState(false);
-  const [chartVisibility, setChartVisibility] = useState(true);
+  const [chartVisibility, setChartVisibility] = useState(false);
 
   const {
     remainingTime,
@@ -33,11 +33,18 @@ const App = () => {
     changeMode,
     currentMode,
     isOverTime,
-  } = useTimer(pomoLength, shortBreakLength, longBreakLength);
+  } = useTimer(pomoLength, shortBreakLength, longBreakLength); //clock functionality
 
-  useTimerLog(active, currentMode, elapsedTime, selectedTask, isOverTime);
+  const { userData, loading, error, reload, setReload } = useLoadTodos(); //loader for todos from db
 
-  const { userData, loading, error, reload, setReload } = useLoadTodos();
+  useTimerLog(
+    active,
+    currentMode,
+    elapsedTime,
+    selectedTask,
+    isOverTime,
+    error
+  ); //logging functions to save timer data to db
 
   return (
     <>
@@ -82,9 +89,9 @@ const App = () => {
         />
         <div>
           {loading ? (
-            <div>Loading...</div>
+            <div className="text-center">Loading...</div>
           ) : error ? (
-            <div>Oops! An error occured: {error.message}</div>
+            <div></div>
           ) : (
             <TodoUI
               userData={userData}
