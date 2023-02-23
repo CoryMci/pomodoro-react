@@ -189,21 +189,23 @@ export function Task({
             </div>
           </div>
         ) : (
-          <div className="grid-flow-col grid h-full cursor-pointer">
+          <div className="w-full h-full flex flex-row cursor-pointer">
             {!loading ? (
               <>
                 <span
-                  className="material-symbols-outlined self-center justify-self-center"
+                  className="material-symbols-outlined self-center justify-self-center px-2 flex-shrink-0"
                   onClick={handleCompleteClick}
                 >
                   {task.completed ? "check_circle" : "radio_button_unchecked"}
                 </span>
-                <span className="col-span-10">{task.title}</span>
-                <span className="self-center text-gray-700">
+                <span className="px-2 w-1/2 flex-grow break-words">
+                  {task.title}
+                </span>
+                <span className="self-center text-gray-700 px-2 flex-shrink-0">
                   {taskLogs ? taskLogs.length : 0}/{task.estimatedTime}
                 </span>
                 <span
-                  className="material-symbols-outlined self-center justify-self-center"
+                  className="material-symbols-outlined self-center justify-self-center px-2 flex-shrink-0"
                   onClick={handleEditClick}
                 >
                   edit
@@ -211,11 +213,16 @@ export function Task({
               </>
             ) : (
               <>
-                <span className="material-symbols-outlined self-center justify-self-center">
+                <span className="material-symbols-outlined self-center justify-self-center px-2 flex-shrink-0">
                   {task.completed ? "check_circle" : "radio_button_unchecked"}
                 </span>
-                <span className="col-span-10">{task.title}</span>
-                <span className="material-symbols-outlined self-center justify-self-center text-gray-700">
+                <span className="px-2 w-1/2 flex-grow break-words">
+                  {task.title}
+                </span>
+                <span className="self-center text-gray-700 px-2 flex-shrink-0">
+                  {taskLogs ? taskLogs.length : 0}/{task.estimatedTime}
+                </span>
+                <span className="material-symbols-outlined self-center justify-self-center px-2 flex-shrink-0">
                   edit
                 </span>
               </>
