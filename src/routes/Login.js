@@ -5,11 +5,13 @@ import { useNavigate } from "react-router-dom";
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [alert, setAlert] = useState(false);
 
   const navigate = useNavigate();
 
   function handleUsernameInput(e) {
     setUsername(e.target.value);
+    setAlert(false);
   }
 
   function handlePasswordInput(e) {
@@ -20,8 +22,13 @@ export default function Login() {
     e.preventDefault();
     const response = await serverLogin(username, password);
     if (response == 200) {
+      console.log(response);
       navigate("/");
+    } else if (response == 404) {
+      setAlert("Invalid username or password!");
     }
+    setUsername("");
+    setPassword("");
   }
 
   return (
@@ -37,6 +44,15 @@ export default function Login() {
           <div className="text-center text-white py-8">Login</div>
         </div>
         <div className="rounded-xl p-6 bg-white">
+          <div className="alert h-8 my-5">
+            {alert ? (
+              <div className="grid justify-center items-center px-2 rounded w-min-content h-full bg-red-100 text-sm">
+                {alert}
+              </div>
+            ) : (
+              <div className="grid justify-center items-center px-2 rounded w-min-content h-full"></div>
+            )}
+          </div>
           <form onSubmit={handleSubmit} className="grid grid-rows-3 gap-8">
             <div className="grid grid-rows-2">
               <label

@@ -19,11 +19,14 @@ export async function serverLogin(username, password) {
       storage.setToken(response.data.token);
       return 200;
     } else {
-      return "Authorization Error";
+      return "Error, please try again later";
     }
   } catch (err) {
-    console.log("test");
-    console.log(err);
+    if (err.response.data.msg) {
+      return err.response.data.msg;
+    } else {
+      console.log(err);
+    }
   }
 }
 
@@ -47,6 +50,12 @@ export async function serverRegister(username, password) {
       return "Authorization Error";
     }
   } catch (err) {
-    console.log(err);
+    if (err.response.data.message) {
+      return err.response.data.message;
+    } else if (err.response.data.errors) {
+      return err.response.data.errors[0].msg;
+    } else {
+      return "Unknown server error";
+    }
   }
 }
