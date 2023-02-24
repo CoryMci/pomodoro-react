@@ -13,9 +13,15 @@ A simple Pomodoro Timer built with React.
 - Dynamic task list to keep track of completed tasks and time spent
 - Time tracking chart to visualize task time distribution
 
+## Screenshots
+
+<img src="./screenshots/App.png" width="400px" height="400px"/>
+<img src="./screenshots/Report.png" width="400px" height="400px"/>
+<img src="./screenshots/Settings.png" width="400px" height="400px"/>
+
 ## Usage
 
-1. In settings, set the desired work and break times in minutes using the "+" and "-" buttons
+1. In settings, set the desired work and break times in minutes using the input or buttons
 2. Click the "Start" button to begin the timer
 3. When the timer ends, an audio notification will play and the timer will continue
 4. To stop the timer at any point, click the "Stop" button
@@ -44,6 +50,8 @@ This project can be run locally by following these steps:
 ## Credits
 
 This project was built by Cory McIver, style inspired by http://pomofocus.io
+
+Not for commercial use.
 
 Tomato icons created by Freepik - Flaticon
 Fonts and symbols courtesy of Google Fonts - Material-Symbols-Outlined and Roboto
