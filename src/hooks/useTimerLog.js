@@ -7,7 +7,9 @@ export default function useTimerLog(
   elapsedTime,
   selectedTask,
   isOverTime,
-  AuthError
+  AuthError,
+  reload,
+  setReload
 ) {
   const [logId, setLogId] = useState(null);
   const [lastElapsed, setLastElapsed] = useState(0);
@@ -18,6 +20,7 @@ export default function useTimerLog(
     let timeoutId;
     if (!AuthError) {
       const updateLogs = async (logData) => {
+        setReload(!reload);
         try {
           await Promise.all(
             Object.entries(logData).map(([logId, data]) =>

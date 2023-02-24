@@ -43,7 +43,9 @@ const App = () => {
     elapsedTime,
     selectedTask,
     isOverTime,
-    AuthError
+    AuthError,
+    reload,
+    setReload
   ); //logging functions to save timer data to db
 
   return (
