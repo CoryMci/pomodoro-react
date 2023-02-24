@@ -24,8 +24,8 @@ export default function Login() {
     if (response == 200) {
       console.log(response);
       navigate("/");
-    } else if (response == 404) {
-      setAlert("Invalid username or password!");
+    } else if (response) {
+      setAlert(response);
     }
     setUsername("");
     setPassword("");

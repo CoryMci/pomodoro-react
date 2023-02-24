@@ -24,8 +24,10 @@ export async function serverLogin(username, password) {
   } catch (err) {
     if (err.response.data.msg) {
       return err.response.data.msg;
+    } else if (err.response.data.errors) {
+      return err.response.data.errors[0].msg;
     } else {
-      console.log(err);
+      return "Unknown server error";
     }
   }
 }
