@@ -75,8 +75,8 @@ export default function ClockUI(props) {
     );
   }
   return (
-    <div className="grid grid-rows-4 rounded-3xl p-6 bg-black bg-opacity-30">
-      <div className="modes grid grid-cols-3 h-8 justify-items-center items-center">
+    <div className="grid grid-rows-4 rounded-3xl p-6 bg-black bg-opacity-30 min-w-fit">
+      <div className="modes grid grid-cols-3 h-8 gap-4 justify-items-center items-center">
         <div
           className="w-28 p-2 rounded text-center transition-colors hover:bg-white hover:bg-opacity-30 hover:cursor-pointer"
           id="pomo"
@@ -112,7 +112,7 @@ export default function ClockUI(props) {
         {secondaryClock}
       </div>
 
-      <div className="controls self-end grid grid-cols-4 h-10 gap-8 items-center">
+      <div className="controls self-end grid grid-cols-4 h-10 gap-4 m:gap-8 items-center">
         {resetBtn}
         {toggleBtn}
         {skipBtn}

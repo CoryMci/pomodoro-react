@@ -9,7 +9,7 @@ export default function Header(props) {
   };
 
   return (
-    <div className="header px-3 grid grid-cols-2 gap-48 items-center">
+    <div className="header px-3 grid grid-cols-2 items-center">
       <div className="title text-3xl font-extrabold">Pomodoro</div>
       <div className="tools justify-self-end grid grid-cols-3 gap-2">
         <span

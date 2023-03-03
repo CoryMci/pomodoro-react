@@ -68,7 +68,7 @@ export default function TodoUI(props) {
           "No pomodoros today!"
         )}
       </div>
-      <div className="grid grid-cols-1 gap-3 w-[32rem] auto-rows-auto">
+      <div className="grid grid-cols-1 gap-3 m:w-[32rem] auto-rows-auto">
         {projects.map((project) => (
           <Project
             key={project._id}
