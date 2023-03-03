@@ -103,7 +103,7 @@ export default function TimeChart(props) {
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className="grid grid-flow-row gap-4 absolute rounded-xl bg-white w-1/4 h-min mx-auto inset-x-0 inset-y-1/4 p-4"
+          className="grid grid-flow-row gap-4 absolute rounded-xl bg-white w-5/6 sm:w-3/4 md:max-w-lg h-min mx-auto inset-x-0 inset-y-1/4 p-4"
         >
           {AuthError ? (
             <h2 className="text-xl font-medium mb-4">

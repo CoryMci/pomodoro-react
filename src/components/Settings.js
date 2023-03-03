@@ -70,7 +70,7 @@ export default function Settings(props) {
             onClick={(e) => {
               e.stopPropagation();
             }}
-            className="absolute rounded-xl bg-white w-1/4 h-min mx-auto inset-x-0 inset-y-1/4 p-4"
+            className="absolute rounded-xl bg-white w-5/6 sm:w-3/4 md:max-w-lg h-min mx-auto inset-x-0 inset-y-1/4 p-4"
           >
             <h2 className="text-lg font-medium mb-4">Settings</h2>
             <button
