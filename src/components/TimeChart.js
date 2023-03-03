@@ -103,7 +103,7 @@ export default function TimeChart(props) {
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className="grid grid-flow-row md:gap-4 absolute rounded-xl bg-white max-h-[95%] md:max-w-lg h-min max-w-[95%] mx-auto my-auto inset-x-0 inset-y-0 p-4"
+          className="grid grid-flow-row lg:gap-4 absolute rounded-xl bg-white max-h-[95%] md:max-w-lg h-min max-w-[95%] mx-auto my-auto inset-x-0 inset-y-0 p-4"
         >
           {AuthError ? (
             <h2 className="text-xl font-medium mb-4">
@@ -147,11 +147,11 @@ export default function TimeChart(props) {
             </div>
           </div>
 
-          <div className="w-5/6 sm:w-5/6 md:max-w-lg min-h-[200px] border-t-2 font-bold">
+          <div className="w-5/6 md:max-w-lg min-h-[200px] border-t-2 font-bold">
             <Bar
               data={chartData}
               options={{
-                responsive: true,
+                maintainAspectRatio: false,
                 scales: {
                   x: {
                     stacked: true,
