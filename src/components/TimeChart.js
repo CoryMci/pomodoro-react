@@ -103,7 +103,7 @@ export default function TimeChart(props) {
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className="grid grid-flow-row gap-4 absolute rounded-xl bg-white w-5/6 sm:w-5/6 md:max-w-lg h-min mx-auto my-auto inset-x-0 inset-y-0 p-4"
+          className="grid grid-flow-row md:gap-4 absolute rounded-xl bg-white max-h-[95%] md:max-w-lg h-min max-w-[95%] mx-auto my-auto inset-x-0 inset-y-0 p-4"
         >
           {AuthError ? (
             <h2 className="text-xl font-medium mb-4">
@@ -112,45 +112,46 @@ export default function TimeChart(props) {
           ) : (
             <h2 className="text-xl font-medium mb-4">Report</h2>
           )}
-
           <button
             onClick={handleCloseChart}
             className="material-symbols-outlined absolute top-2 right-2 font-bold text-gray-400 text-l"
           >
             close
           </button>
-          <div className="border border-red-400 w-max rounded-md overflow-hidden h-max-max">
-            <button
-              className={`font-bold  text-l border-r px-3 ${
-                dateRange == 6 ? "bg-red-400 text-white" : "text-red-400"
-              }`}
-              onClick={(e) => handleDateRangeChange(e, 6)}
-            >
-              Past week
-            </button>
-
-            <button
-              className={`font-boldtext-l px-3 ${
-                dateRange == 6 ? "text-red-400" : "bg-red-400 text-white"
-              }`}
-              onClick={(e) => handleDateRangeChange(e, 30)}
-            >
-              Past month
-            </button>
-          </div>
-          <div>
-            <div className="text-gray-500 uppercase tracking-tight text-xs m-2">
-              Total time this {dateRange == 6 ? "Week" : "Month"}
+          <div className="grid grid-flow-row">
+            <div className="self-end border border-red-400 w-max rounded-md overflow-hidden h-6">
+              <button
+                className={`font-bold border-r px-3 ${
+                  dateRange == 6 ? "bg-red-400 text-white" : "text-red-400"
+                }`}
+                onClick={(e) => handleDateRangeChange(e, 6)}
+              >
+                Past week
+              </button>
+              <button
+                className={`font-bold px-3 ${
+                  dateRange == 6 ? "text-red-400" : "bg-red-400 text-white"
+                }`}
+                onClick={(e) => handleDateRangeChange(e, 30)}
+              >
+                Past month
+              </button>
             </div>
-            <div className="tracking-tight text-3xl m-2">
-              {parseTime(TotalTime)}
+            <div>
+              <div className="text-gray-500 uppercase tracking-tight text-xs m-2">
+                Total time this {dateRange == 6 ? "Week" : "Month"}
+              </div>
+              <div className="tracking-tight text-3xl m-2">
+                {parseTime(TotalTime)}
+              </div>
             </div>
           </div>
 
-          <div className="w-full h-auto border-t-2 font-bold">
+          <div className="w-5/6 sm:w-5/6 md:max-w-lg min-h-[200px] border-t-2 font-bold">
             <Bar
               data={chartData}
               options={{
+                responsive: true,
                 scales: {
                   x: {
                     stacked: true,
