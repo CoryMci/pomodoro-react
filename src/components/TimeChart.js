@@ -103,7 +103,7 @@ export default function TimeChart(props) {
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className="grid grid-flow-row gap-4 absolute rounded-xl bg-white w-5/6 sm:w-3/4 md:max-w-lg h-min mx-auto inset-x-0 inset-y-1/4 p-4"
+          className="grid grid-flow-row gap-4 absolute rounded-xl bg-white w-5/6 sm:w-5/6 md:max-w-lg h-min mx-auto my-auto inset-x-0 inset-y-0 p-4"
         >
           {AuthError ? (
             <h2 className="text-xl font-medium mb-4">
@@ -119,7 +119,7 @@ export default function TimeChart(props) {
           >
             close
           </button>
-          <div className="border border-red-400 w-max rounded-md overflow-hidden">
+          <div className="border border-red-400 w-max rounded-md overflow-hidden h-max-max">
             <button
               className={`font-bold  text-l border-r px-3 ${
                 dateRange == 6 ? "bg-red-400 text-white" : "text-red-400"
